@@ -1,8 +1,6 @@
 package com.wuqio.DAO;
 
 
-import com.wuqio.Factory.MysqlConnFactory;
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -18,7 +16,7 @@ public class verseDAO {
         Context ctx = new InitialContext();
         DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/lamp");
         Connection conn = ds.getConnection();
-        String querySql = "SELECT verse FROM verse WHERE date=curdate();";
+        String querySql = "SELECT verse from verse WHERE date=if((SELECT date from verse WHERE date=curdate())=NULL, subdate(curdate(), INTERVAL 1 DAY), curdate());";
         Statement statement = conn.createStatement();
         ResultSet rs = statement.executeQuery(querySql);
         rs.next();
