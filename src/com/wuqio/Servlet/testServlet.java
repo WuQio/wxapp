@@ -19,7 +19,7 @@ public class testServlet extends HttpServlet {
             str+=line;
         }
         str = new String(str.getBytes("ISO-8859-1"), "UTF-8");
-        Process process = Runtime.getRuntime().exec("python3 /opt/tomcat/pyscripts/py.py  "+str);
+        Process process = Runtime.getRuntime().exec("python3 /opt/apache-tomcat-7.0.85/pyscripts/py.py  "+str);
         try {
             process.waitFor();
         } catch (InterruptedException e) {
