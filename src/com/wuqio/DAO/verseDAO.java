@@ -29,6 +29,7 @@ public class verseDAO {
         }
         rs.close();
         statement.close();
+        conn.close();
         return verse;
     }
 }
